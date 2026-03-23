@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fragments of Us</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Caveat', cursive;
+  background: radial-gradient(circle at center, #1a0000, #000);
+  color: #f5f5f5;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* INTRO */
+.intro {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #000 40%, #0a0000);
+  z-index: 2000;
+  overflow: hidden;
+}
+
+.intro.flash {
+  animation: flash 0.4s ease;
+}
+
+@keyframes flash {
+  50% { background: #200000; }
+}
+
+.crack {
+  position: absolute;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(#fff, #ff4d6d, transparent);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(12deg);
+  box-shadow: 0 0 25px rgba(255,0,80,1);
+  animation: crackGrow 1.2s ease forwards;
+}
+
+@keyframes crackGrow {
+  0% { height: 0; opacity: 0; }
+  100% { height: 400px; }
+}
+
+.shard {
+  position: absolute;
+  width: 6px;
+  height: 20px;
+  background: linear-gradient(#fff, transparent);
+}
+
+.intro::before,
+.intro::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #000;
+}
+
+.intro.open::before {
+  animation: tearLeft 1.8s forwards;
+}
+
+.intro.open::after {
+  animation: tearRight 1.8s forwards;
+}
+
+@keyframes tearLeft {
+  to { transform: translateX(-120%); }
+}
+
+@keyframes tearRight {
+  to { transform: translateX(120%); }
+}
+
+/* MAIN */
+.fade-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  opacity: 0;
+  transition: 1.2s;
+  z-index: 999;
+}
+.fade-overlay.active { opacity: 1; }
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 15px;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  color: #ff4d6d;
+}
+
+.page-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page {
+  display: none;
+  max-width: 600px;
+  padding: 30px;
+  background: #120000;
+  border-radius: 20px;
+  transform: rotate(-1deg);
+}
+
+.page.active {
+  display: block;
+  animation: fadeIn 1.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+}
+
+/* PETALS */
+.petal {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 30% 30%, #ffd1dc, #ff4d6d);
+  border-radius: 60% 40%;
+  pointer-events: none;
+}
+
+/* BLOOD */
+.blood {
+  position: fixed;
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(#8b0000, transparent);
+  top: 0;
+  animation: drip 4s linear infinite;
+}
+
+@keyframes drip {
+  to { transform: translateY(100vh); opacity: 0; }
+}
+
+.text {
+  white-space: pre-line;
+  font-size: 20px;
+  line-height: 2;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.3;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <div class="crack"></div>
+  <div id="shards"></div>
+</div>
+
+<div class="fade-overlay" id="fade"></div>
+
+<div class="app" onclick="nextPage()">
+
+  <div class="header">Things I Couldn’t Say</div>
+
+  <div class="page-container">
+
+    <div class="page active">
+      <div class="text" data-text="To My Cherry Blossom..."></div>
+    </div>
+
+    <div class="page">
+      <div class="text" data-text="I don’t even know how to begin this, because nothing feels right when I think about losing you.
+
+      After one and a half years… we’ve come to an end. Even writing that feels unreal. I always knew this day might come because of my mistakes, but I never truly believed I would have to live without you.
+      
+      You loved me in a way I had never experienced before. Honestly, I didn’t even know love could feel like that until you came into my life. The way you cared for me, the way you spoke to me, the way you treated me like I was your own… no one has ever done that for me. Not even in my childhood do I remember feeling that kind of warmth.
+      
+      And maybe that’s where I failed…  
+      I didn’t know how to handle something so pure."></div>
+    </div>
+
+    <div class="page">
+      <div class="text" data-text="I made mistakes, not just once, but again and again. I hurt the person who loved me the most. And that is something I will regret for the rest of my life. You didn’t deserve any of that. You deserved peace, trust, and happiness… but I gave you pain.
+
+      You always said you treated me like your own child… and I felt it. Every small thing—your “ntutti”, your “kutta”, your care—it made me feel safe, like I finally belonged somewhere. And now, losing that… feels like I’m losing a part of my soul.
+      
+      Maybe if I was more mature…  
+      Maybe if I understood love better…  
+      Maybe if I didn’t have the flaws I carry…
+      
+      Things would have been different."></div>
+    </div>
+
+    <div class="page">
+      <div class="text" data-text="I learned so much from you, Cherry. You showed me what real love looks like. And it breaks me to realize that I understood its value only when I started losing it.
+
+      A part of me keeps wishing…  
+      If life ever gives me another chance with you, without all the past, I would hold you so carefully… I would love you the way you truly deserve… like a queen. But I know life doesn’t work like that. Some things, once broken, can’t be the same again.
+      
+      I know I lost your trust. And I don’t blame you. I lost something so precious with my own hands."></div>
+    </div>
+
+    <div class="page">
+      <div class="text" data-text="Even now… I already miss you.  
+      I miss your love.  
+      I miss your care.  
+      I miss being yours.
+      
+      Before, you were the one who guided me, who kept me in control, who made me feel right. Now I feel empty… like a child who doesn’t know what is right or wrong anymore. With you, everything felt easy. Without you, everything feels heavy.
+      "></div>
+    </div>
+
+    <div class="page">
+      <div class="text" data-text="I don’t think I will ever find someone like you again. And maybe that’s my punishment… to live with the memory of someone I couldn’t keep.
+
+      But one thing I want you to know…  
+      No matter what happens in your life… no matter where you are…  
+      If you ever feel alone, if you ever need someone, if you ever need me…
+      
+      I will always be there for you."></div>
+    </div>
+
+  </div>
+  <div class="page">
+    <div class="text" data-text="Not because I’m expecting anything in return…  
+    But because loving you was the most real thing I ever felt.
+    
+    I pray that you find happiness, peace, and a love that never hurts you. You deserve that… more than anyone.
+    
+    Thank you for loving me the way you did.  
+    I’m sorry I couldn’t be the person you needed.
+    
+    I will carry you in my heart… always.
+    
+    — Ashir"></div>
+  </div>
+
+</div>
+
+  <div class="footer">tap anywhere</div>
+</div>
+<script>
+// INTRO EFFECT
+const intro = document.getElementById('intro');
+const shards = document.getElementById('shards');
+
+const heartbeat = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_171b1c2c58.mp3');
+
+setTimeout(()=>{
+  heartbeat.play().catch(()=>{});
+  intro.classList.add('flash');
+},500);
+
+function shatter(){
+  for(let i=0;i<40;i++){
+    const s=document.createElement('div');
+    s.className='shard';
+    s.style.left='50%';
+    s.style.top='50%';
+    shards.appendChild(s);
+
+    const angle=Math.random()*Math.PI*2;
+    const dist=200+Math.random()*200;
+
+    requestAnimationFrame(()=>{
+      s.style.transform=`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px)`;
+      s.style.opacity=0;
+      s.style.transition='1.5s';
+    });
+
+    setTimeout(()=>s.remove(),1500);
+  }
+}
+
+function burstPetals(){
+  for(let i=0;i<25;i++){
+    createPetal(window.innerWidth/2,window.innerHeight/2,true);
+  }
+}
+
+setTimeout(()=>{
+  shatter();
+  burstPetals();
+  intro.classList.add('open');
+},1400);
+
+setTimeout(()=>{
+    intro.style.pointerEvents = "none";
+  intro.remove();
+},3500);
+
+// TYPEWRITER
+function typeWriter(el,text){
+  el.innerHTML="";
+  let i=0;
+  function t(){
+    if(i<text.length){
+      el.innerHTML+=text[i++];
+      setTimeout(t,25);
+    }
+  }
+  t();
+}
+
+const pages=document.querySelectorAll('.page');
+let current=0;
+
+function showPage(i){
+  pages.forEach(p=>p.classList.remove('active'));
+  pages[i].classList.add('active');
+  const el=pages[i].querySelector('.text');
+  typeWriter(el,el.dataset.text);
+}
+
+function nextPage(){
+  if(current<pages.length-1){
+    document.getElementById('fade').classList.add('active');
+    setTimeout(()=>{
+      current++;
+      showPage(current);
+      document.getElementById('fade').classList.remove('active');
+    },800);
+  }
+}
+
+showPage(0);
+
+// PETALS PHYSICS
+function createPetal(x,y,burst=false){
+  const p=document.createElement('div');
+  p.className='petal';
+
+  p.x=x||Math.random()*innerWidth;
+  p.y=y||-20;
+  p.vx=(Math.random()-0.5)*2;
+  p.vy=1+Math.random()*2;
+
+  document.body.appendChild(p);
+
+  function anim(){
+    p.vy+=0.02;
+    p.vx*=0.98;
+
+    p.x+=p.vx;
+    p.y+=p.vy;
+
+    p.style.left=p.x+'px';
+    p.style.top=p.y+'px';
+
+    if(p.y<innerHeight+20){
+      requestAnimationFrame(anim);
+    }else p.remove();
+  }
+
+  anim();
+}
+
+setInterval(()=>createPetal(),120);
+
+// INTERACTION
+function pushPetals(x,y){
+  document.querySelectorAll('.petal').forEach(p=>{
+    const dx=p.x-x;
+    const dy=p.y-y;
+    const d=Math.sqrt(dx*dx+dy*dy);
+
+    if(d<120){
+      const angle=Math.atan2(dy,dx);
+      const f=(120-d)/120;
+      p.vx+=Math.cos(angle)*f*2.5;
+      p.vy+=Math.sin(angle)*f*2.5;
+    }
+  });
+}
+
+window.addEventListener('mousemove',e=>pushPetals(e.clientX,e.clientY));
+window.addEventListener('touchmove',e=>{
+  const t=e.touches[0];
+  pushPetals(t.clientX,t.clientY);
+});
+
+// BLOOD
+setInterval(()=>{
+  const b=document.createElement('div');
+  b.className='blood';
+  b.style.left=Math.random()*innerWidth+'px';
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),4000);
+},900);
+
+document.addEventListener('click', nextPage);
+</script>
+
+</body>
+</html>
